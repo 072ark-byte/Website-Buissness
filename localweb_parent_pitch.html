@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LocalWeb Studio — A Small Business, Built Smart</title>
+<style>
+:root{--bg:#0b100e;--panel:#121a16;--panel2:#17221c;--line:#2b3b31;--text:#f1f5ef;--muted:#a9b8ad;--green:#b8e986;--green2:#d9f8b8;--amber:#f0c879;--red:#ffb5a9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.5}
+nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:16px 5vw;background:rgba(11,16,14,.94);backdrop-filter:blur(12px);border-bottom:1px solid #26342b}
+.logo{font-weight:800;letter-spacing:-.04em;font-size:1.15rem}.logo span{color:var(--green)}nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-size:.9rem}nav a:hover{color:var(--green)}
+main{max-width:1240px;margin:auto;padding:0 5vw}.hero{min-height:83vh;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:70px 0 58px}
+.eyebrow{color:var(--green);text-transform:uppercase;letter-spacing:.16em;font-size:.76rem;font-weight:800}.hero h1{font-size:clamp(3rem,6.2vw,6rem);line-height:.99;letter-spacing:-.065em;margin:18px 0 24px}.hero h1 em{font-style:normal;color:var(--green)}.hero p{color:var(--muted);font-size:1.12rem;max-width:600px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:10px;text-decoration:none;font-weight:750;border:1px solid var(--line);color:var(--text);background:var(--panel)}.btn.primary{background:var(--green);color:#142014;border-color:var(--green)}.btn:hover{transform:translateY(-1px)}
+.mock{background:linear-gradient(145deg,#1a2a20,#101713);border:1px solid #33473a;border-radius:20px;padding:18px;box-shadow:0 30px 90px #0008;transform:rotate(1deg)}
+.browser{border:1px solid #35473b;border-radius:12px;overflow:hidden;background:#f4f2e9;color:#17251b}.browserbar{height:34px;background:#e4e6dd;display:flex;align-items:center;gap:6px;padding:0 12px}.dot{width:8px;height:8px;border-radius:50%;background:#9ca99e}.address{margin-left:10px;background:#f6f7f2;border-radius:5px;color:#667267;font-size:.65rem;padding:4px 10px;flex:1}.demo{padding:28px 25px 25px;background:linear-gradient(120deg,#edf0e6,#dbe5d1)}.demo small{font-size:.65rem;letter-spacing:.15em;font-weight:800;color:#557052}.demo h3{font-family:Georgia,serif;font-size:2.1rem;line-height:1.03;letter-spacing:-.04em;margin:15px 0 10px;max-width:350px}.demo p{color:#58695a;font-size:.78rem;max-width:290px}.demo button{border:0;border-radius:5px;background:#1c3526;color:#fff;padding:10px 13px;font-size:.7rem;font-weight:700}.demo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:22px}.demo-card{background:#f8f8f2;border:1px solid #d2ddcc;padding:12px 8px;border-radius:7px}.demo-card b{font-size:.7rem;display:block}.demo-card span{font-size:.6rem;color:#667267}
+.mockcaption{display:flex;justify-content:space-between;color:#a9b8ad;font-size:.72rem;margin:13px 2px 0}
+section{padding:74px 0;border-top:1px solid #243128}.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:28px}.sectionhead h2{font-size:clamp(2rem,4vw,3.4rem);letter-spacing:-.055em;line-height:1.03;margin:9px 0 0}.sectionhead p{max-width:430px;color:var(--muted);margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:23px}.number{color:var(--green);font-weight:800;font-size:.76rem;letter-spacing:.12em}.card h3{font-size:1.2rem;margin:12px 0 8px}.card p,.card li{color:var(--muted);font-size:.94rem}.card ul{padding-left:18px}.tag{display:inline-block;font-size:.7rem;padding:5px 8px;border:1px solid #3a4d3d;border-radius:20px;color:var(--green);margin:4px 4px 0 0}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px}.darkbox{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px}.darkbox h3{font-size:1.45rem;margin:0 0 16px}.check{display:flex;gap:12px;margin:14px 0;color:var(--muted)}.check b{color:var(--green);font-size:1.1rem}
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}.pricecard{border:1px solid var(--line);border-radius:16px;padding:24px;background:var(--panel);position:relative}.pricecard.featured{border-color:var(--green);background:linear-gradient(160deg,#1b2a20,#111814)}.pricecard h3{margin:0;font-size:1.1rem}.price{font-size:2.3rem;letter-spacing:-.06em;font-weight:850;margin:14px 0 4px}.price small{font-size:.8rem;letter-spacing:0;color:var(--muted);font-weight:500}.pricecard p,.pricecard li{color:var(--muted);font-size:.88rem}.pricecard ul{padding-left:18px;min-height:110px}.note{color:var(--muted);font-size:.8rem;margin-top:15px}
+.calc{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px}.calccontrols{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:25px}.field{margin:22px 0}.field label{display:flex;justify-content:space-between;gap:12px;font-size:.92rem;color:var(--muted);margin-bottom:9px}.field output{color:var(--green);font-weight:800}input[type=range]{width:100%;accent-color:var(--green)}.results{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{padding:22px;border-radius:14px;background:var(--panel2);border:1px solid var(--line)}.metric span{display:block;color:var(--muted);font-size:.8rem}.metric strong{display:block;font-size:clamp(1.6rem,3vw,2.6rem);letter-spacing:-.06em;margin-top:8px}.metric.highlight strong{color:var(--green)}.disclaimer{border-left:3px solid var(--amber);padding:12px 15px;background:#211d13;color:#d8cba9;font-size:.84rem;margin-top:14px;border-radius:0 8px 8px 0}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.step{border-top:2px solid var(--green);padding:17px 14px 0}.step strong{display:block;font-size:1rem;margin:8px 0}.step p{color:var(--muted);font-size:.87rem}
+.risk{display:grid;grid-template-columns:1fr 1fr;gap:12px}.riskrow{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:17px;background:var(--panel);border:1px solid var(--line);border-radius:12px}.riskrow div:first-child{color:#e4a99f}.riskrow div:last-child{color:var(--green);font-size:.9rem}
+.final{padding:46px;border:1px solid #3b523f;border-radius:20px;background:radial-gradient(ellipse at top right,#233b29,#111813 65%);display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}.final h2{font-size:clamp(2rem,4vw,3.5rem);line-height:1;letter-spacing:-.06em;margin:12px 0}.final p{color:var(--muted)}.promise{border-left:1px solid #3b523f;padding-left:25px}.promise strong{color:var(--green);display:block;font-size:1.2rem;margin-bottom:8px}
+footer{padding:28px 5vw;max-width:1240px;margin:auto;display:flex;justify-content:space-between;gap:20px;color:#718077;font-size:.78rem}
+@media(max-width:800px){nav{padding:14px 5vw}nav .links{display:none}.hero{grid-template-columns:1fr;min-height:auto;padding:60px 0}.mock{transform:none}.grid,.pricing{grid-template-columns:1fr}.sectionhead{display:block}.sectionhead p{margin-top:15px}.split,.calc,.final{grid-template-columns:1fr}.timeline{grid-template-columns:1fr 1fr}.risk{grid-template-columns:1fr}.final{padding:28px}.promise{border-left:0;border-top:1px solid #3b523f;padding:20px 0 0}.results{grid-template-columns:1fr 1fr}}
+@media(min-width:1200px){main{padding:0 4vw}.hero{min-height:78vh}}
+@media print{nav{position:static}.hero{min-height:auto}section{break-inside:avoid}.btn{border:1px solid #777}}
+</style>
+
+<style id="aesthetic-upgrade">
+:root{--bg:#080d0a;--panel:#111a14;--panel2:#18241b;--line:#2b3d30;--text:#f4f4e9;--muted:#aeb9ac;--green:#c6f28b;--green2:#e0f8bd;--amber:#f3d59b}
+html{scroll-behavior:smooth;scroll-padding-top:84px;scroll-snap-type:y proximity}
+body{background:radial-gradient(ellipse at 85% 5%,rgba(83,119,69,.15),transparent 32%),radial-gradient(ellipse at 0% 42%,rgba(66,99,67,.11),transparent 27%),var(--bg);font-size:16px;letter-spacing:-.012em}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.11;z-index:-1;background-image:radial-gradient(#c6f28b .55px,transparent .55px);background-size:20px 20px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+nav{padding:17px 5vw;border-bottom-color:#2c3b2e;box-shadow:0 8px 30px #0002}
+.logo{font-size:1.04rem;letter-spacing:.08em}.logo span{color:var(--green)}nav a{font-size:.82rem;transition:color .2s}
+main{max-width:1320px}
+.hero{min-height:88vh;padding:78px 0 74px;gap:6vw}
+.eyebrow{font-size:.7rem;letter-spacing:.2em;display:flex;align-items:center;gap:10px}.eyebrow:before{content:"";display:inline-block;width:24px;height:1px;background:var(--green);opacity:.8}
+.hero h1{font-size:clamp(3.4rem,7.2vw,7rem);letter-spacing:-.078em;line-height:.91;margin:24px 0 28px}.hero h1 em{background:linear-gradient(110deg,#dff8b7,#a8d879 72%,#e9f5ce);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:1.08rem;line-height:1.8;max-width:550px}
+.btn{border-radius:7px;padding:14px 19px;font-size:.86rem;transition:transform .22s,background .22s,border-color .22s;letter-spacing:-.01em}.btn.primary{box-shadow:0 8px 30px #b8e9861c}.btn.primary:hover{background:#d5f8aa;transform:translateY(-3px)}.btn:not(.primary):hover{border-color:#7f9a7d;transform:translateY(-3px)}
+.mock{padding:14px;border-radius:18px;background:linear-gradient(145deg,#1d3022,#0d130f);border-color:#3b523f;box-shadow:0 35px 100px #0008,0 0 0 1px #b8e9860a;transform:rotate(0deg);position:relative}.mock:before{content:"";position:absolute;inset:-1px;border-radius:18px;background:linear-gradient(130deg,#b8e98655,transparent 30%,transparent 70%,#b8e98618);pointer-events:none}.browser{border-radius:10px;box-shadow:0 12px 30px #0002}.demo{padding:clamp(22px,3vw,38px);min-height:310px;background:linear-gradient(140deg,#f3f2e9,#dce8d3)}.demo h3{font-size:clamp(2rem,3.2vw,3.1rem);line-height:.98;margin:18px 0 14px}.demo p{font-size:.82rem;line-height:1.65}.demo button{padding:12px 15px;letter-spacing:.04em;transition:transform .2s}.demo button:hover{transform:translateY(-2px)}.demo-grid{gap:10px;margin-top:28px}.demo-card{padding:14px 10px;box-shadow:0 3px 10px #23331b08}.mockcaption{font-size:.67rem;letter-spacing:.08em;margin:16px 3px 3px}
+section{padding:clamp(68px,8vw,112px) 0;border-top:1px solid #26352a;scroll-snap-align:start;position:relative}
+.sectionhead{margin-bottom:38px;align-items:end}.sectionhead h2{font-size:clamp(2.5rem,5vw,4.4rem);line-height:.99;letter-spacing:-.075em;margin-top:15px}.sectionhead p{font-size:.98rem;line-height:1.8;max-width:440px}
+.grid{gap:16px}.card,.darkbox,.pricecard,.calccontrols{border-radius:12px;background:linear-gradient(145deg,#141e17,#0f1611);border-color:#2c3e30;box-shadow:0 12px 40px #00000012;transition:transform .25s,border-color .25s,background .25s}.card{padding:27px;position:relative;overflow:hidden}.card:after{content:"";position:absolute;width:120px;height:120px;border:1px solid #c6f28b12;border-radius:50%;right:-65px;bottom:-68px;box-shadow:0 0 0 18px #c6f28b04,0 0 0 36px #c6f28b03;pointer-events:none}.card:hover{transform:translateY(-5px);border-color:#607b5d;background:linear-gradient(145deg,#19261b,#111912)}.number{font-size:.7rem;letter-spacing:.17em}.card h3{font-size:1.35rem;letter-spacing:-.035em;margin:16px 0 10px}.card p,.card li{font-size:.92rem;line-height:1.75}.tag{font-size:.66rem;letter-spacing:.02em;padding:6px 9px;border-color:#3d5740;background:#b8e98609}
+.split{gap:16px}.darkbox{padding:clamp(22px,3vw,34px)}.darkbox h3{font-size:1.55rem;letter-spacing:-.04em;margin-bottom:22px}.check{gap:13px;line-height:1.65;margin:18px 0}.check b{width:23px;height:23px;flex:0 0 23px;display:inline-flex;align-items:center;justify-content:center;background:#b8e98614;border-radius:50%;font-size:.78rem}.check strong{color:#eef3e8;font-size:.95rem}
+.pricing{gap:16px}.pricecard{padding:28px;overflow:hidden}.pricecard.featured{border-color:#a5d47d;background:linear-gradient(150deg,#1b2a1e,#101812);box-shadow:0 18px 55px #b8e9860b;transform:translateY(-6px)}.pricecard h3{font-size:1.25rem;letter-spacing:-.03em;margin-top:9px}.price{font-size:clamp(2.2rem,3vw,3rem);margin:20px 0 5px;letter-spacing:-.075em}.pricecard p,.pricecard li{font-size:.9rem;line-height:1.75}.pricecard ul{min-height:132px;margin-top:20px}.pricecard .eyebrow{font-size:.61rem}.note{line-height:1.7;margin-top:20px}
+.calc{gap:16px;align-items:stretch}.calccontrols{padding:clamp(22px,3vw,32px)}.field{margin:24px 0}.field label{font-size:.9rem}.field output{font-variant-numeric:tabular-nums}input[type=range]{cursor:pointer;height:6px}.results{gap:13px}.metric{border-radius:12px;background:linear-gradient(145deg,#18251b,#101711);border-color:#2b3c2e;padding:clamp(18px,2.5vw,27px)}.metric span{font-size:.78rem;line-height:1.5}.metric strong{font-size:clamp(1.65rem,3.4vw,3rem);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.metric.highlight{background:linear-gradient(135deg,#213724,#152219);border-color:#4e704b}.disclaimer{border-left-width:2px;line-height:1.75;background:#201c12;border-color:#c6a45c;color:#d6c9a9;padding:16px 18px}
+.timeline{gap:15px}.step{padding:20px 17px 0;border-top:1px solid #56744f;position:relative}.step:before{content:"";position:absolute;top:-4px;left:0;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px #b8e98612}.step strong{font-size:1.1rem;letter-spacing:-.03em;margin:13px 0 10px}.step p{line-height:1.75;font-size:.88rem}
+.risk{gap:13px}.riskrow{padding:20px;gap:18px;background:linear-gradient(145deg,#141e17,#101611);border-radius:10px;border-color:#2b3b2e;line-height:1.6}.riskrow div:first-child{font-size:.9rem}.riskrow div:last-child{font-size:.87rem}
+.final{padding:clamp(30px,5vw,62px);border-radius:16px;background:radial-gradient(ellipse at 100% 0%,#2d4931,#17231a 43%,#0f1711 82%);border-color:#3c5940;box-shadow:0 25px 80px #0003;position:relative;overflow:hidden}.final:after{content:"30";position:absolute;right:8%;top:-.45em;font-size:clamp(12rem,25vw,25rem);line-height:1;font-weight:900;letter-spacing:-.12em;color:#c6f28b07;pointer-events:none}.final h2{font-size:clamp(2.7rem,5vw,5rem);letter-spacing:-.08em;line-height:.96;margin:20px 0}.final p{font-size:.96rem;line-height:1.8}.final .promise{position:relative;z-index:1}.promise strong{letter-spacing:-.03em;font-size:1.3rem}.promise p{margin:12px 0}.final .actions{position:relative;z-index:1}
+footer{padding-top:30px;padding-bottom:35px;letter-spacing:.04em;text-transform:uppercase;font-size:.65rem;line-height:1.8}
+#reading-progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--green);z-index:99;box-shadow:0 0 12px #c6f28b77;transition:width .1s linear}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.75,.25,1)}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:800px){.hero{padding:58px 0;gap:35px}.hero h1{font-size:clamp(3.2rem,13vw,5rem)}.pricecard.featured{transform:none}.sectionhead h2{font-size:clamp(2.5rem,10vw,3.6rem)}.timeline{gap:24px 12px}.riskrow{padding:15px;grid-template-columns:1fr;gap:5px}.final:after{right:-4%;top:20%}footer{display:block}footer span{display:block;margin:6px 0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}*{transition:none!important}}
+</style>
+
+
+<style id="animated-business-upgrade">
+:root{--lime:#c6f28b;--cream:#eff3e7}
+.hero{position:relative;isolation:isolate}.hero:before{content:"";position:absolute;z-index:-1;width:44vw;height:44vw;max-width:650px;max-height:650px;left:-24vw;top:8%;border-radius:50%;background:radial-gradient(circle,#91c66a0e,transparent 67%);animation:slowPulse 9s ease-in-out infinite alternate}
+@keyframes slowPulse{from{transform:scale(.9);opacity:.45}to{transform:scale(1.12);opacity:1}}
+.art-panel{position:relative;overflow:hidden;min-height:230px;border:1px solid #344a37;border-radius:13px;background:linear-gradient(140deg,#dfe8d5,#f1f0e4 68%,#c8d9bb);color:#18291c}
+.art-panel svg{display:block;width:100%;height:auto;min-height:230px}
+.float{animation:float 5s ease-in-out infinite}.float.delay{animation-delay:-2.1s}.pulse-dot{animation:pulseDot 2.2s ease-in-out infinite;transform-origin:center}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}@keyframes pulseDot{0%,100%{opacity:.45;transform:scale(.9)}50%{opacity:1;transform:scale(1.12)}}
+.feature-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch}.feature-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,4vw,44px);border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,#152019,#0e1510)}
+.feature-copy h3{font-size:clamp(1.8rem,3.2vw,2.8rem);line-height:1.02;letter-spacing:-.06em;margin:15px 0}.feature-copy p{color:var(--muted);line-height:1.8}.pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.pill{font-size:.75rem;border:1px solid #38503b;color:#d9ebd0;padding:7px 10px;border-radius:5px;background:#c6f28b08}
+.stat-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.stat{border:1px solid var(--line);background:#111a14;border-radius:10px;padding:19px}.stat strong{font-size:clamp(1.6rem,3vw,2.5rem);display:block;color:var(--lime);letter-spacing:-.07em}.stat span{font-size:.8rem;color:var(--muted);line-height:1.5;display:block;margin-top:5px}
+.week-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.day{padding:18px 15px;border:1px solid var(--line);border-radius:10px;background:linear-gradient(155deg,#152019,#101611)}.day .hours{font-size:1.6rem;color:var(--lime);font-weight:850;letter-spacing:-.06em}.day b{display:block;margin:8px 0;font-size:.88rem}.day p{font-size:.79rem;line-height:1.65;color:var(--muted);margin:0}.time-callout{margin-top:15px;padding:19px 22px;border:1px solid #40583e;border-radius:10px;background:linear-gradient(100deg,#1c2a1c,#121a14);display:flex;gap:15px;align-items:flex-start}.time-callout .iconbox{font-size:1.3rem;color:var(--lime)}.time-callout p{color:var(--muted);margin:0;line-height:1.75}
+.zero-cost{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px}.zero-hero{border:1px solid #466342;border-radius:14px;background:radial-gradient(circle at 70% 20%,#385438,#17271a 65%);padding:28px;display:flex;flex-direction:column;justify-content:space-between;min-height:300px;position:relative;overflow:hidden}.zero-hero:after{content:"₹0";font-size:clamp(6rem,13vw,10rem);font-weight:900;letter-spacing:-.12em;color:#d4f4b111;position:absolute;right:-7px;bottom:-42px;line-height:1}.zero-hero strong{font-size:clamp(2.3rem,4vw,4rem);line-height:.95;letter-spacing:-.08em;position:relative;z-index:1}.zero-hero p{color:#c0d0bd;max-width:280px;position:relative;z-index:1}.cost-list{display:grid;gap:11px}.cost-item{display:grid;grid-template-columns:36px 1fr auto;align-items:center;gap:12px;border:1px solid var(--line);border-radius:10px;padding:16px;background:#111a14}.cost-icon{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:#c6f28b12;color:var(--lime);font-weight:800}.cost-item strong{font-size:.9rem}.cost-item p{font-size:.79rem;color:var(--muted);margin:4px 0 0;line-height:1.5}.cost-tag{font-size:.74rem;color:var(--lime);font-weight:800;white-space:nowrap}
+@media(max-width:800px){.feature-layout,.zero-cost{grid-template-columns:1fr}.week-grid{grid-template-columns:1fr 1fr}.stat-strip{grid-template-columns:1fr}.art-panel svg{min-height:180px}}
+@media(max-width:480px){.week-grid{grid-template-columns:1fr}.cost-item{grid-template-columns:34px 1fr}.cost-tag{grid-column:2}}
+</style>
+
+</head>
+<body>
+<div id="reading-progress" aria-hidden="true"></div>
+<nav><div class="logo">LOCAL<span>WEB</span> / STUDIO</div><div class="links"><a href="#model">The model</a><a href="#why">Why it can work</a><a href="#time">Time & studies</a><a href="#cost">Cost</a><a href="#plan">The plan</a></div></nav>
+<main>
+<header class="hero">
+  <div>
+    <div class="eyebrow">A practical business experiment · 2026</div>
+    <h1>Build useful websites.<br><em>Build real income.</em></h1>
+    <p>I want to start a small website service for local businesses: find businesses that could benefit from a better online presence, build a useful website, and offer ongoing updates and maintenance.</p>
+    <div class="actions"><a class="btn primary" href="#model">See the business plan ↘</a><a class="btn" href="#numbers">Explore the numbers</a></div>
+    <p style="font-size:.8rem;margin-top:18px">A low-cost pilot, not a promise of instant riches. School comes first.</p>
+  </div>
+  <div class="mock">
+    <div class="browser"><div class="browserbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><div class="address">sample-business.in</div></div>
+      <div class="demo"><small>YOUR NEIGHBOURHOOD · EST. 2012</small><h3>Good work deserves to be found.</h3><p>A clean, mobile-friendly website that tells customers what you do, where you are, and how to contact you.</p><button>CALL / ENQUIRE</button>
+      <div class="demo-grid"><div class="demo-card"><b>Our services</b><span>Clear, simple details</span></div><div class="demo-card"><b>Find us</b><span>Map & opening hours</span></div><div class="demo-card"><b>Get in touch</b><span>Call or WhatsApp</span></div></div></div>
+    </div><div class="mockcaption"><span>CONCEPT DEMO · NOT A REAL CLIENT</span><span>01 / 04</span></div>
+  </div>
+</header>
+
+<section id="model">
+  <div class="sectionhead"><div><div class="eyebrow">01 / The opportunity</div><h2>A simple service.<br>A real customer problem.</h2></div><p>Many small businesses need a clear, credible place online where potential customers can check services, hours, location, photos and contact details.</p></div>
+  <div class="grid">
+    <article class="card"><div class="number">01 — FIND</div><h3>Spot a genuine need</h3><p>Look for businesses with no website, an outdated website, or information that is difficult to find on a phone.</p><span class="tag">Research</span><span class="tag">Personalised outreach</span></article>
+    <article class="card"><div class="number">02 — BUILD</div><h3>Show a useful solution</h3><p>Create a sample concept, agree on scope, then build a fast, mobile-friendly website with the client's real information and approval.</p><span class="tag">AI-assisted coding</span><span class="tag">Human quality checks</span></article>
+    <article class="card"><div class="number">03 — SUPPORT</div><h3>Earn trust over time</h3><p>Offer optional maintenance: updates, backups where supported, uptime checks and small content changes, with clear limits.</p><span class="tag">Recurring service</span><span class="tag">Long-term relationships</span></article>
+  </div>
+</section>
+
+<section id="why">
+  <div class="sectionhead"><div><div class="eyebrow">02 / Why this can work</div><h2>Small businesses need<br>to be easy to find.</h2></div><p>This is a testable service, not a guaranteed success. I can start with one local niche, learn what owners actually need, and improve the offer based on real conversations.</p></div>
+  <div class="feature-layout">
+    <div class="feature-copy"><div class="number">THE CUSTOMER PROBLEM</div><h3>A good business can still have a poor online presence.</h3><p>Potential customers often want quick answers: what does this business offer, where is it, when is it open, and how do I contact it? A clear website can make those answers easier to find and help the business look credible.</p><p><strong>My advantage:</strong> I can build the first version myself using AI-assisted tools, so I don't need to hire a developer to test the idea.</p><div class="pillrow"><span class="pill">Low upfront commitment</span><span class="pill">Visible sample work</span><span class="pill">One client at a time</span></div></div>
+    <div class="art-panel" aria-label="Illustration of a local business website appearing on a laptop and phone">
+      <svg viewBox="0 0 600 440" role="img" aria-label="Illustrated laptop and phone showing a small business website">
+        <defs><linearGradient id="screen" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f8f7ee"/><stop offset="1" stop-color="#dce8d3"/></linearGradient><linearGradient id="device" x1="0" x2="1"><stop stop-color="#1c3021"/><stop offset="1" stop-color="#324a35"/></linearGradient></defs>
+        <circle cx="460" cy="75" r="90" fill="#c6f28b" opacity=".25"/><circle cx="95" cy="350" r="110" fill="#779b69" opacity=".13"/>
+        <g class="float" transform="translate(58 70)"><rect x="0" y="0" width="370" height="250" rx="16" fill="url(#device)"/><rect x="12" y="12" width="346" height="220" rx="8" fill="url(#screen)"/><rect x="12" y="12" width="346" height="24" rx="8" fill="#e4e9dc"/><circle cx="27" cy="24" r="3" fill="#a7b5a0"/><circle cx="38" cy="24" r="3" fill="#a7b5a0"/><circle cx="49" cy="24" r="3" fill="#a7b5a0"/><text x="32" y="64" font-size="9" font-weight="700" letter-spacing="2" fill="#577254">LOCAL BUSINESS</text><text x="32" y="99" font-size="28" font-family="Georgia,serif" font-weight="bold" fill="#203a26">Made with care.</text><text x="32" y="124" font-size="11" fill="#657662">A better way to meet your next customer.</text><rect x="32" y="144" width="105" height="28" rx="5" fill="#24412c"/><text x="45" y="162" font-size="9" font-weight="bold" fill="#f5f7ef">CONTACT US</text><rect x="32" y="188" width="88" height="28" rx="4" fill="#fff" stroke="#d2ddcc"/><rect x="130" y="188" width="88" height="28" rx="4" fill="#fff" stroke="#d2ddcc"/><rect x="228" y="188" width="88" height="28" rx="4" fill="#fff" stroke="#d2ddcc"/><path d="M150 250 L300 250 L330 270 L120 270 Z" fill="#aab8a3"/><path d="M170 251 L280 251 L293 260 L157 260 Z" fill="#71866e"/></g>
+        <g class="float delay" transform="translate(385 205)"><rect width="145" height="220" rx="22" fill="#1b2e20"/><rect x="7" y="8" width="131" height="204" rx="16" fill="url(#screen)"/><rect x="48" y="14" width="34" height="4" rx="2" fill="#9aa995"/><rect x="18" y="35" width="109" height="65" rx="6" fill="#b9cda9"/><circle cx="74" cy="62" r="17" fill="#78966d"/><path d="M43 88 Q74 48 105 88" fill="#526f4f"/><rect x="18" y="111" width="90" height="8" rx="4" fill="#344b36"/><rect x="18" y="126" width="105" height="5" rx="2.5" fill="#a8b8a1"/><rect x="18" y="137" width="82" height="5" rx="2.5" fill="#a8b8a1"/><rect x="18" y="155" width="109" height="27" rx="5" fill="#24412c"/><text x="36" y="172" font-size="9" font-weight="bold" fill="#f5f7ef">ENQUIRE</text></g>
+        <g class="pulse-dot"><circle cx="492" cy="74" r="7" fill="#638a58"/><circle cx="492" cy="74" r="15" fill="none" stroke="#638a58" stroke-opacity=".45"/></g>
+      </svg>
+    </div>
+  </div>
+  <div class="stat-strip"><div class="stat"><strong>1 niche</strong><span>Start focused—for example, salons, cafés or home services.</span></div><div class="stat"><strong>1 demo</strong><span>Show a working example instead of asking people to imagine it.</span></div><div class="stat"><strong>1st client</strong><span>Prove the process before trying to scale it.</span></div></div>
+</section>
+
+<section id="motivation">
+  <div class="sectionhead"><div><div class="eyebrow">03 / Why I want to pursue it</div><h2>Learn by building<br>something real.</h2></div><p>This isn't only about money. It's a practical way to develop skills that compound over time while creating something useful for local businesses.</p></div>
+  <div class="grid">
+    <article class="card"><div class="number">01 — INDEPENDENCE</div><h3>Earn through value</h3><p>I want to learn how to turn my skills into a service people are genuinely willing to pay for—not rely on a vague idea of making money online.</p></article>
+    <article class="card"><div class="number">02 — SKILL</div><h3>Become better at building</h3><p>Each project teaches me prompting, coding, testing, design, troubleshooting and how to take responsibility for the final result.</p></article>
+    <article class="card"><div class="number">03 — EXPERIENCE</div><h3>Learn how business works</h3><p>Finding prospects, communicating professionally, setting a price, delivering on time and supporting customers are skills I can use long-term.</p></article>
+  </div>
+</section>
+
+<section id="time">
+  <div class="sectionhead"><div><div class="eyebrow">04 / Time & school</div><h2>A capped schedule.<br>School stays first.</h2></div><p>My proposed limit is five hours per week, mostly on weekends. During exams or heavy school weeks, I pause or reduce the business work.</p></div>
+  <div class="week-grid">
+    <div class="day"><div class="hours">1 hr</div><b>Prospect research</b><p>Find a few suitable businesses and identify a real website opportunity.</p></div>
+    <div class="day"><div class="hours">1 hr</div><b>Outreach & follow-up</b><p>Write personalised messages, respond to enquiries and arrange short calls.</p></div>
+    <div class="day"><div class="hours">2 hrs</div><b>Build & test</b><p>Work on a demo or agreed client task in a focused block.</p></div>
+    <div class="day"><div class="hours">1 hr</div><b>Admin & review</b><p>Track progress, costs, deadlines and next actions.</p></div>
+    <div class="day"><div class="hours">0 hrs</div><b>During exam crunch</b><p>Pause outreach and new commitments. Focus on school.</p></div>
+  </div>
+  <div class="time-callout"><div class="iconbox">✓</div><p><strong style="color:var(--cream)">The non-negotiable rule:</strong> homework, revision, sleep and school responsibilities come first. I won't promise a client a deadline unless I can meet it. If grades, sleep or assignments suffer, I reduce the workload or pause the business.</p></div>
+</section>
+
+<section id="cost">
+  <div class="sectionhead"><div><div class="eyebrow">05 / Startup cost</div><h2>₹0 to start—<br>with clear conditions.</h2></div><p>I will build the websites myself using the computer and internet I already have, plus free development tools and free hosting where suitable. No paid ads, subscriptions or hired developers for the pilot.</p></div>
+  <div class="zero-cost">
+    <div class="zero-hero"><div class="number">INITIAL PILOT BUDGET</div><strong>₹0<br>upfront</strong><p>No new software or equipment purchases planned for the 30-day test.</p></div>
+    <div class="cost-list">
+      <div class="cost-item"><div class="cost-icon">01</div><div><strong>Website building</strong><p>I'll do the design, coding and testing myself with free tools.</p></div><div class="cost-tag">₹0</div></div>
+      <div class="cost-item"><div class="cost-icon">02</div><div><strong>Development tools</strong><p>Use existing tools and free tiers; no paid subscriptions without approval.</p></div><div class="cost-tag">₹0</div></div>
+      <div class="cost-item"><div class="cost-icon">03</div><div><strong>Hosting for demos</strong><p>Use a free hosting tier where its limits and terms are suitable.</p></div><div class="cost-tag">₹0*</div></div>
+      <div class="cost-item"><div class="cost-icon">04</div><div><strong>Client domain or paid hosting</strong><p>Only if needed, agreed in advance and preferably paid directly by the client.</p></div><div class="cost-tag">Client-approved</div></div>
+      <div class="cost-item"><div class="cost-icon">05</div><div><strong>Existing computer & internet</strong><p>Already available; no new hardware purchase is part of this plan.</p></div><div class="cost-tag">Existing</div></div>
+    </div>
+  </div>
+  <p class="note">*₹0 means no planned new upfront spending for the pilot—not that every future website can be hosted for free. Some clients may need paid domains, hosting, email, integrations or other services. I'll explain those costs before committing, and won't spend money without parental approval.</p>
+</section>
+
+<section>
+  <div class="sectionhead"><div><div class="eyebrow">06 / What I would sell</div><h2>Not just “a website.”<br>A business outcome.</h2></div><p>The goal is to help a business look credible and make it easier for customers to take the next step. No guaranteed sales or rankings.</p></div>
+  <div class="split">
+    <div class="darkbox"><h3>Starter website</h3>
+      <div class="check"><b>✓</b><div><strong>Mobile-first design</strong><br><span style="color:var(--muted)">Looks and works well on phones, tablets and computers.</span></div></div>
+      <div class="check"><b>✓</b><div><strong>Essential information</strong><br><span style="color:var(--muted)">Services, photos, location, hours and contact options.</span></div></div>
+      <div class="check"><b>✓</b><div><strong>Clear calls to action</strong><br><span style="color:var(--muted)">Tap-to-call, enquiry form or WhatsApp link if appropriate.</span></div></div>
+      <div class="check"><b>✓</b><div><strong>Basic quality checks</strong><br><span style="color:var(--muted)">Links, spelling, loading, responsive layout and accessibility basics.</span></div></div>
+    </div>
+    <div class="darkbox"><h3>Optional monthly care</h3>
+      <div class="check"><b>✓</b><div><strong>Small content updates</strong><br><span style="color:var(--muted)">Change hours, prices, service descriptions or photos.</span></div></div>
+      <div class="check"><b>✓</b><div><strong>Routine checks</strong><br><span style="color:var(--muted)">Check key links and forms on an agreed schedule.</span></div></div>
+      <div class="check"><b>✓</b><div><strong>Transparent boundaries</strong><br><span style="color:var(--muted)">State response times, included edits and what costs extra.</span></div></div>
+      <div class="check"><b>✓</b><div><strong>Client ownership</strong><br><span style="color:var(--muted)">Agree who owns the domain, hosting, accounts and source files.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="sectionhead"><div><div class="eyebrow">07 / Example pricing</div><h2>Start small.<br>Prove the value.</h2></div><p>These are example prices to test, not promises. The client approves the scope and separately pays any domain or hosting costs they choose.</p></div>
+  <div class="pricing">
+    <article class="pricecard"><h3>Launch</h3><div class="price">₹4,999 <small>/ one-time*</small></div><p>For a simple online presence.</p><ul><li>Up to 3 core pages</li><li>Mobile-friendly layout</li><li>Contact and location details</li><li>One agreed revision round</li></ul><span class="tag">Pilot offer</span></article>
+    <article class="pricecard featured"><div class="eyebrow">Most practical to test</div><h3>Business</h3><div class="price">₹9,999 <small>/ one-time*</small></div><p>For a business needing more detail.</p><ul><li>Up to 5 core pages</li><li>Services and gallery</li><li>Enquiry / WhatsApp CTA</li><li>Two agreed revision rounds</li></ul><span class="tag">Defined scope</span></article>
+    <article class="pricecard"><h3>Care plan</h3><div class="price">₹999 <small>/ month*</small></div><p>Optional support after launch.</p><ul><li>Small agreed content edits</li><li>Monthly link / form check</li><li>Basic support window</li><li>Hosting/domain billed separately</li></ul><span class="tag">Recurring revenue</span></article>
+  </div>
+  <p class="note">*Illustrative INR pricing only. My initial build cost can be ₹0 if I use my existing computer/internet and free tools/hosting. A custom domain, paid hosting or other paid services may cost money; the client should approve and pay those directly. Any applicable taxes and out-of-scope work must be discussed separately.</p>
+</section>
+
+<section id="numbers">
+  <div class="sectionhead"><div><div class="eyebrow">08 / The numbers</div><h2>Revenue is possible.<br>Profit takes discipline.</h2></div><p>Change the assumptions below to see a simple monthly scenario. This is a planning tool—not a forecast or a promise.</p></div>
+  <div class="calc">
+    <div class="calccontrols">
+      <div class="field"><label for="sites">New websites sold this month <output id="sitesOut">1</output></label><input id="sites" type="range" min="0" max="5" value="1"></div>
+      <div class="field"><label for="fee">Average setup fee <output id="feeOut">₹7,500</output></label><input id="fee" type="range" min="3000" max="20000" step="500" value="7500"></div>
+      <div class="field"><label for="clients">Active maintenance clients <output id="clientsOut">3</output></label><input id="clients" type="range" min="0" max="20" value="3"></div>
+      <div class="field"><label for="monthly">Monthly fee per client <output id="monthlyOut">₹999</output></label><input id="monthly" type="range" min="500" max="2500" step="100" value="1000"></div>
+      <div class="field"><label for="costs">Estimated monthly business costs <output id="costsOut">₹0</output></label><input id="costs" type="range" min="0" max="10000" step="250" value="0"></div>
+    </div>
+    <div>
+      <div class="results">
+        <div class="metric highlight"><span>Illustrative gross revenue</span><strong id="revenue">₹10,500</strong></div>
+        <div class="metric"><span>After estimated costs</span><strong id="net">₹8,500</strong></div>
+        <div class="metric"><span>Setup revenue</span><strong id="setup">₹7,500</strong></div>
+        <div class="metric"><span>Recurring revenue / month</span><strong id="recurring">₹3,000</strong></div>
+      </div>
+      <div class="disclaimer"><strong>Reality check:</strong> This excludes the value of your time, unpaid sales attempts, revisions, refunds, taxes and costs not entered above. A ₹0 cost setting assumes free tools and no paid services. You may sell zero websites in a month. Revenue is not the same as take-home profit.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sectionhead"><div><div class="eyebrow">09 / Skills I will build</div><h2>Low-cost learning.<br>Transferable skills.</h2></div><p>Even if the first version doesn't become a large business, the experiment can build useful technical and commercial skills.</p></div>
+  <div class="grid">
+    <article class="card"><div class="number">SKILL 01</div><h3>Sales & communication</h3><p>Learn to research a business, identify a specific problem, explain value clearly and handle rejection professionally.</p></article>
+    <article class="card"><div class="number">SKILL 02</div><h3>Technology & delivery</h3><p>Use AI tools as assistants while learning to test, debug, deploy and maintain what you deliver.</p></article>
+    <article class="card"><div class="number">SKILL 03</div><h3>Business fundamentals</h3><p>Understand pricing, expenses, customer service, scope, cash flow and how to build trust.</p></article>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="sectionhead"><div><div class="eyebrow">10 / A controlled 30-day pilot</div><h2>Test the idea before<br>making big commitments.</h2></div><p>The first goal is not to become rich in 30 days. It is to prove that I can build something good, find real prospects and earn one satisfied customer.</p></div>
+  <div class="timeline">
+    <div class="step"><div class="number">WEEK 01</div><strong>Build the demo</strong><p>Make one polished sample site for a fictional business. Test it on mobile and desktop. Track all costs.</p></div>
+    <div class="step"><div class="number">WEEK 02</div><strong>Research 20 prospects</strong><p>Choose one local niche. Record public business contact details and a specific, respectful reason each might benefit.</p></div>
+    <div class="step"><div class="number">WEEK 03</div><strong>Start conversations</strong><p>Use personalised, honest outreach. Ask permission to show a concept. No spam, fake claims or pretending to be an established agency.</p></div>
+    <div class="step"><div class="number">WEEK 04</div><strong>Review the evidence</strong><p>Track replies, calls, proposals, time spent and any sale. Improve the offer—or stop if the evidence doesn't support continuing.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sectionhead"><div><div class="eyebrow">11 / Risks & safeguards</div><h2>Take the risks seriously.</h2></div><p>I know this is not risk-free. The point of a small pilot is to keep the downside limited, make responsibilities clear and stop if the evidence or school results say to stop.</p></div>
+  <div class="risk">
+    <div class="riskrow"><div><strong>School performance drops</strong></div><div>Schoolwork first; fixed weekly time limit; pause during exams.</div></div>
+    <div class="riskrow"><div><strong>No one buys</strong></div><div>Run a 30-day test; spend very little; review evidence before scaling.</div></div>
+    <div class="riskrow"><div><strong>Client expects too much</strong></div><div>Written scope, revision limits, delivery date and approval before work.</div></div>
+    <div class="riskrow"><div><strong>Security or payment issue</strong></div><div>Parent involved in contracts and payments; never collect unnecessary customer data.</div></div>
+    <div class="riskrow"><div><strong>Website breaks</strong></div><div>Test before launch; document ownership and backups; be honest about support limits.</div></div>
+    <div class="riskrow"><div><strong>Privacy or spam concerns</strong></div><div>Use legitimate public business contact channels; personalise messages; respect opt-outs.</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="final">
+    <div><div class="eyebrow">The request</div><h2>Give me 30 days to prove it.</h2><p>I'm asking for permission to test this for 30 days with a ₹0 planned upfront budget and a five-hour weekly cap. I'll show you the work, outreach, hours, expenses and results so we can decide together whether it deserves more time.</p><div class="actions"><a class="btn primary" href="#plan">Review the 30-day plan</a><a class="btn" href="#numbers">Check the assumptions</a></div></div>
+    <div class="promise"><strong>My commitments</strong><p>School remains the priority.</p><p>No spending without permission.</p><p>Maximum five hours per week during the pilot.</p><p>No misleading sales claims.</p><p>Clear records of time, costs and income.</p><p>Review results together after 30 days.</p></div>
+  </div>
+</section>
+</main>
+<footer><span>LOCALWEB / STUDIO · A proposed student-led website service</span><span>Concept presentation · Not a registered agency or client case study</span></footer>
+<script>
+const ids=['sites','fee','clients','monthly','costs'];
+const fmt=n=>'₹'+Math.round(n).toLocaleString('en-IN');
+function update(){
+ const v={}; ids.forEach(id=>v[id]=Number(document.getElementById(id).value));
+ document.getElementById('sitesOut').textContent=v.sites;
+ document.getElementById('feeOut').textContent=fmt(v.fee);
+ document.getElementById('clientsOut').textContent=v.clients;
+ document.getElementById('monthlyOut').textContent=fmt(v.monthly);
+ document.getElementById('costsOut').textContent=fmt(v.costs);
+ const setup=v.sites*v.fee, recurring=v.clients*v.monthly, revenue=setup+recurring, net=revenue-v.costs;
+ document.getElementById('setup').textContent=fmt(setup);
+ document.getElementById('recurring').textContent=fmt(recurring);
+ document.getElementById('revenue').textContent=fmt(revenue);
+ document.getElementById('net').textContent=fmt(net);
+}
+ids.forEach(id=>document.getElementById(id).addEventListener('input',update));update();
+</script>
+
+<script id="aesthetic-interactions">
+(()=>{
+ const bar=document.getElementById('reading-progress');
+ const updateProgress=()=>{const max=document.documentElement.scrollHeight-innerHeight;bar.style.width=(max>0?(scrollY/max)*100:0)+'%'};
+ addEventListener('scroll',updateProgress,{passive:true});addEventListener('resize',updateProgress);updateProgress();
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(!reduced&&'IntersectionObserver'in window){
+  const targets=document.querySelectorAll('section .sectionhead, section .card, section .darkbox, section .pricecard, section .calccontrols, section .metric, section .step, section .riskrow, section .final');
+  targets.forEach((el,i)=>{el.classList.add('reveal');if(el.matches('.sectionhead'))el.style.transitionDelay='0ms';else el.style.transitionDelay=(Math.min(i%4,3)*75)+'ms'});
+  const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});targets.forEach(el=>io.observe(el));
+ }
+})();
+</script>
+
+</body>
+</html>
